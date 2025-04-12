@@ -1,0 +1,19 @@
+services:
+  web-nginx:
+    image: nginx:latest
+    container_name: web-app
+#    volumes:
+#     - ./html:/usr/share/nginx/html
+    networks:
+      - twotier
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 60s
+    ports:
+      - "8080:80"
+
+networks:
+  twotier:
